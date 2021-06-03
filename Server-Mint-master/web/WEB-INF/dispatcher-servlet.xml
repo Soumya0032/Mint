@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    
+    <mvc:annotation-driven/>
+    <context:annotation-config/>
+    <context:component-scan base-package="controller"/>
+
+<!--    Login Mapping-->
+
+    <bean id="loginController" class="controller.LoginController">
+        <property name="loginDao" ref="logindao"/>
+    </bean>
+    <bean id="logindao" class="dao.LoginDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+<!--    Mint Mapping-->
+    
+    <bean id="mintController" class="controller.MintController">
+        <property name="mintDao" ref="mintdao"/>
+    </bean>
+    <bean id="mintdao" class="dao.MintDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+<!--    Scheme mappings-->
+
+
+<bean id="schemeController" class="controller.SchemeController">
+        <property name="apyDao" ref="apyDao" />
+        <property name="pmjjbyDao" ref="pmjjbyDao" />
+        <property name="pmsbyDao" ref="pmsbyDao" />
+        <property name="rdDao" ref="rdDao" />
+    </bean>
+    
+    <bean id="apyDao" class="dao.ApyDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+        <bean id="pmjjbyDao" class="dao.PmjjbyDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean> 
+
+    <bean id="pmsbyDao" class="dao.PmsbyDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>  
+
+    <bean id="rdDao" class="dao.RdDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+    
+<!--    Account Opening Mapping-->
+    <bean id="accountController" class="controller.AccountController">
+        <property name="accountDao" ref="accountdao"/>
+    </bean>
+    <bean id="accountdao" class="dao.AccountDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+        <property name="url" value="jdbc:derby://localhost:1527/Mint" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+        
+        
+</beans>

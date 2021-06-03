@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    
+    <mvc:annotation-driven/>
+    <context:annotation-config/>
+    <context:component-scan base-package="controller"/>
+    
+<!--   Mini Statement-->
+  <bean id="miniStatementController" class="controller.MiniStatementController">
+        <property name="miniStatementDao" ref="ministatementdao"/>
+    </bean>
+    <bean id="ministatementdao" class="dao.MiniStatementDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+<!--    Balance Enquiry-->
+      <bean id="balanceEnquiryController" class="controller.BalanceEnquiryController">
+        <property name="balanceEnquiryDao" ref="balanceenquirydao"/>
+    </bean>
+    <bean id="balanceenquirydao" class="dao.BalanceEnquiryDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+<!--    Withdraw Money-->
+    <bean id="withdrawController" class="controller.WithdrawController">
+        <property name="withdrawDao" ref="withdrawdao"/>
+    </bean>
+    <bean id="withdrawdao" class="dao.WithdrawDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>      
+
+<!--    Deposit Money-->
+    <bean id="depositController" class="controller.DepositController">
+        <property name="depositDao" ref="depositdao"/>
+    </bean>
+    <bean id="depositdao" class="dao.DepositDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>             
+
+<!--    Fund Transfer-->
+    <bean id="fundTransferController" class="controller.FundTransferController">
+        <property name="fundTransferDao" ref="fundtransferdao"/>
+    </bean>
+    <bean id="fundtransferdao" class="dao.FundTransferDao">
+        <property name="dataSource" ref="dataSource" />
+    </bean>          
+                                          
+                                          
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+        <property name="url" value="jdbc:derby://localhost:1527/Bank" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>  
+</beans>
